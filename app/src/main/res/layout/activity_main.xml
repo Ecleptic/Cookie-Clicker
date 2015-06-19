@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="top|center"
+              android:orientation="vertical"
+              android:padding="24dp"
+              tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/cookie0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cookie0"
+        android:textSize="38sp"/>
+
+    <TextView
+        android:id="@+id/bankdisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/blank_string"
+        android:textSize="40sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/cookie1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookie1"/>
+
+        <Button
+            android:id="@+id/cookie2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookie2"/>
+
+        <Button
+            android:id="@+id/cookie3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookie3"/>
+
+        <Button
+            android:id="@+id/cookie4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookie4"/>
+
+        <Button
+            android:id="@+id/cookie5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookie5"/>
+
+        <Button
+            android:id="@+id/cookie6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cookie6"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
