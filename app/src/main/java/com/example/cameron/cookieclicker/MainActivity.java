@@ -63,11 +63,9 @@ public class MainActivity extends ActionBarActivity {
         mBuildings[5] = new Building();
 
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         if (mCookie0 == null) {
-            Log.d(TAG, "WHY? 1");
+            Log.d(TAG, "mCookie0 is null");
         }
 
         mCookie0.setOnClickListener(new View.OnClickListener() {
