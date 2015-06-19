@@ -14,6 +14,8 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 
+
+// testing!!!
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
 //    private int amount = 1;
