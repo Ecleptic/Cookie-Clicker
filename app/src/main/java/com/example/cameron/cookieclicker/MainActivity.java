@@ -1,7 +1,5 @@
 package com.example.cameron.cookieclicker;
 
-import android.nfc.Tag;
-import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,7 +20,6 @@ public class MainActivity extends ActionBarActivity {
     private int cookie5_amount = -10000;
     private int cookie6_amount = -40000;
 
-
     Button mCookie0;
     Button mCookie1;
     Button mCookie2;
@@ -33,8 +28,17 @@ public class MainActivity extends ActionBarActivity {
     Button mCookie5;
     Button mCookie6;
     Button mCookie7;
+
     TextView mBankDisplay;
+    TextView mCookie1Price;
+    TextView mCookie2Price;
+    TextView mCookie3Price;
+    TextView mCookie4Price;
+    TextView mCookie5Price;
+    TextView mCookie6Price;
+
     Bank mBank;
+//    Building mBuilding;
 
 
     public Building[] mBuildings;
@@ -46,10 +50,9 @@ public class MainActivity extends ActionBarActivity {
 
         mBank = new Bank();
 
-        mBankDisplay = (TextView) findViewById(R.id.bankdisplay);
+
 
         mCookie0 = (Button) findViewById(R.id.cookie0);
-
 
         mCookie1 = (Button) findViewById(R.id.cookie1);
         mCookie2 = (Button) findViewById(R.id.cookie2);
@@ -58,6 +61,13 @@ public class MainActivity extends ActionBarActivity {
         mCookie5 = (Button) findViewById(R.id.cookie5);
         mCookie6 = (Button) findViewById(R.id.cookie6);
 
+        mBankDisplay = (TextView) findViewById(R.id.bankdisplay);
+        mCookie1Price = (TextView) findViewById(R.id.cookie1_price);
+        mCookie2Price = (TextView) findViewById(R.id.cookie2_price);
+        mCookie3Price = (TextView) findViewById(R.id.cookie3_price);
+        mCookie4Price = (TextView) findViewById(R.id.cookie4_price);
+        mCookie5Price = (TextView) findViewById(R.id.cookie5_price);
+        mCookie6Price = (TextView) findViewById(R.id.cookie6_price);
 
         mBuildings = new Building[6];
         mBuildings[0] = new Building();
@@ -81,6 +91,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie1_amount) >= 0) {
                     mBank.deposit(cookie1_amount);
+                    mBuildings[0].addC1Building(1);
+                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
