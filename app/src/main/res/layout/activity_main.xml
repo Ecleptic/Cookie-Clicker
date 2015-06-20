@@ -21,6 +21,7 @@
         android:text="@string/blank_string"
         android:textSize="40sp"/>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,44 +29,131 @@
         android:orientation="vertical">
 
 
-        <Button
-            android:id="@+id/cookie1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cookie1"/>
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/cookie2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cookie2"/>
+            <Button
+                android:id="@+id/cookie1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="79.38"
+                android:text="@string/cookie1"/>
 
-        <Button
-            android:id="@+id/cookie3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cookie3"/>
+            <TextView
+                android:id="@+id/cookie1_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie1_price"
+                android:textSize="25dp"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/cookie4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cookie4"/>
 
-        <Button
-            android:id="@+id/cookie5"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cookie5"/>
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/cookie6"
+            <Button
+                android:id="@+id/cookie2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="80"
+                android:text="@string/cookie2"/>
+
+            <TextView
+                android:id="@+id/cookie2_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie2_price"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cookie6"/>
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cookie3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:text="@string/cookie3"/>
+
+            <TextView
+                android:id="@+id/cookie3_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie3_price"
+                android:textSize="25dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cookie4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:text="@string/cookie4"/>
+
+            <TextView
+                android:id="@+id/cookie4_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie4_price"
+                android:textSize="25dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cookie5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:text="@string/cookie5"/>
+
+            <TextView
+                android:id="@+id/cookie5_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie5_price"
+                android:textSize="25dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cookie6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:text="@string/cookie6"/>
+            <TextView
+                android:id="@+id/cookie6_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie6_price"
+                android:textSize="25dp"/>
+        </LinearLayout>
 
     </LinearLayout>
-
 </LinearLayout>
+
 
 

@@ -14,10 +14,15 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 
-
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
-//    private int amount = 1;
+    private int cookie0_amount = 1;
+    private int cookie1_amount = -15;
+    private int cookie2_amount = -100;
+    private int cookie3_amount = -500;
+    private int cookie4_amount = -3000;
+    private int cookie5_amount = -10000;
+    private int cookie6_amount = -40000;
 
 
     Button mCookie0;
@@ -63,17 +68,79 @@ public class MainActivity extends ActionBarActivity {
         mBuildings[5] = new Building();
 
 
-
-        if (mCookie0 == null) {
-            Log.d(TAG, "mCookie0 is null");
-        }
-
         mCookie0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "?");
+                mBank.deposit(cookie0_amount);
+                mBankDisplay.setText("" + mBank.getBalance());
             }
         });
+
+        mCookie1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance + cookie1_amount) >= 0) {
+                    mBank.deposit(cookie1_amount);
+                    mBankDisplay.setText("" + mBank.getBalance());
+                }
+            }
+        });
+
+        mCookie2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance + cookie2_amount) >= 0) {
+                    mBank.deposit(cookie2_amount);
+                    mBankDisplay.setText("" + mBank.getBalance());
+                }
+            }
+        });
+
+        mCookie3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance + cookie3_amount) >= 0) {
+                    mBank.deposit(cookie3_amount);
+                    mBankDisplay.setText("" + mBank.getBalance());
+                }
+            }
+        });
+
+        mCookie4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance + cookie4_amount) >= 0) {
+                    mBank.deposit(cookie4_amount);
+                    mBankDisplay.setText("" + mBank.getBalance());
+                }
+            }
+        });
+
+        mCookie5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance + cookie5_amount) >= 0) {
+                    mBank.deposit(cookie5_amount);
+                    mBankDisplay.setText("" + mBank.getBalance());
+                }
+            }
+        });
+
+        mCookie6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.d(TAG, "bank balance + cookie amount... " + (mBank.mBankBalance + cookie6_amount));
+                if ((mBank.mBankBalance + cookie6_amount) >= 0) {
+                    mBank.deposit(cookie6_amount);
+                    mBankDisplay.setText("" + mBank.getBalance());
+//                    Log.d(TAG, "bank Balance after setting text is " + mBank.mBankBalance);
+
+                } else {
+//                    Log.d(TAG, "bank Balance is " + mBank.mBankBalance);
+                }
+            }
+        });
+
 
     }
 

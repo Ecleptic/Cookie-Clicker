@@ -12,4 +12,10 @@
     <string name="cookie5">Cookie 5</string>
     <string name="cookie6">Cookie 6</string>
     <string name="cookie7">Cookie 7</string>
+    <string name="cookie1_price">15</string>
+    <string name="cookie2_price">100</string>
+    <string name="cookie3_price">500</string>
+    <string name="cookie4_price">3000</string>
+    <string name="cookie5_price">10000</string>
+    <string name="cookie6_price">40000</string>
 </resources>
