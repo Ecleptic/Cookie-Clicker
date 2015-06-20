@@ -1,5 +1,6 @@
 package com.example.cameron.cookieclicker;
 
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
+
     private int cookie0_amount = 1;
     private int cookie1_amount = -15;
     private int cookie2_amount = -100;
@@ -19,6 +21,8 @@ public class MainActivity extends ActionBarActivity {
     private int cookie4_amount = -3000;
     private int cookie5_amount = -10000;
     private int cookie6_amount = -40000;
+    private long CPS = 0;
+
 
     Button mCookie0;
     Button mCookie1;
@@ -30,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
     Button mCookie7;
 
     TextView mBankDisplay;
+    TextView mCPS;
     TextView mCookie1Price;
     TextView mCookie2Price;
     TextView mCookie3Price;
@@ -38,10 +43,11 @@ public class MainActivity extends ActionBarActivity {
     TextView mCookie6Price;
 
     Bank mBank;
-//    Building mBuilding;
-
 
     public Building[] mBuildings;
+
+    private Handler mHandler = new Handler();
+    private boolean wasRun = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         mBank = new Bank();
-
 
 
         mCookie0 = (Button) findViewById(R.id.cookie0);
@@ -62,6 +67,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie6 = (Button) findViewById(R.id.cookie6);
 
         mBankDisplay = (TextView) findViewById(R.id.bankdisplay);
+        mCPS = (TextView) findViewById(R.id.cps);
         mCookie1Price = (TextView) findViewById(R.id.cookie1_price);
         mCookie2Price = (TextView) findViewById(R.id.cookie2_price);
         mCookie3Price = (TextView) findViewById(R.id.cookie3_price);
@@ -78,11 +84,28 @@ public class MainActivity extends ActionBarActivity {
         mBuildings[5] = new Building();
 
 
+        mBankDisplay.setText("" + mBank.getBalance());
+
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (wasRun) {
+                    mCPS.setText("" +CPS);
+                    //whatever you want to do if run
+                    //you can add you want to increase variable here
+                }
+                mHandler.postDelayed(this, 1000);
+            }
+        }1000); // 1 seconds
+
+
         mCookie0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mBank.deposit(cookie0_amount);
                 mBankDisplay.setText("" + mBank.getBalance());
+
             }
         });
 
@@ -92,7 +115,9 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance + cookie1_amount) >= 0) {
                     mBank.deposit(cookie1_amount);
                     mBuildings[0].addC1Building(1);
-                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
+                    CPS += 1;
+                    Log.d(TAG, "CPS = " + CPS);
+//                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
@@ -103,6 +128,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie2_amount) >= 0) {
                     mBank.deposit(cookie2_amount);
+                    mBuildings[1].addC2Building(1);
+//                    Log.d(TAG, "mC2Number is: " + mBuildings[1].numberOfC2Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
@@ -113,6 +140,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie3_amount) >= 0) {
                     mBank.deposit(cookie3_amount);
+                    mBuildings[2].addC3Building(1);
+//                    Log.d(TAG, "mC3Number is: " + mBuildings[2].numberOfC3Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
@@ -123,6 +152,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie4_amount) >= 0) {
                     mBank.deposit(cookie4_amount);
+                    mBuildings[3].addC4Building(1);
+//                    Log.d(TAG, "mC4Number is: " + mBuildings[3].numberOfC4Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
@@ -133,6 +164,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie5_amount) >= 0) {
                     mBank.deposit(cookie5_amount);
+                    mBuildings[4].addC5Building(1);
+//                    Log.d(TAG, "mC5Number is: " + mBuildings[4].numberOfC5Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
@@ -141,18 +174,16 @@ public class MainActivity extends ActionBarActivity {
         mCookie6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.d(TAG, "bank balance + cookie amount... " + (mBank.mBankBalance + cookie6_amount));
                 if ((mBank.mBankBalance + cookie6_amount) >= 0) {
                     mBank.deposit(cookie6_amount);
+                    mBuildings[5].addC6Building(1);
+//                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
-//                    Log.d(TAG, "bank Balance after setting text is " + mBank.mBankBalance);
 
                 } else {
-//                    Log.d(TAG, "bank Balance is " + mBank.mBankBalance);
                 }
             }
         });
-
 
     }
 
