@@ -4,7 +4,7 @@
               android:layout_height="wrap_content"
               android:gravity="top|center"
               android:orientation="vertical"
-              android:padding="24dp"
+              android:padding="18dp"
               tools:context=".MainActivity">
 
     <Button
@@ -158,6 +158,24 @@
                 android:textSize="25dp"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/cookie7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:text="@string/cookie7"/>
+            <TextView
+                android:id="@+id/cookie7_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/cookie7_price"
+                android:textSize="25dp"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 
