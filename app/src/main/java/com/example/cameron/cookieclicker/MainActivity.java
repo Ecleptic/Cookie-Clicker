@@ -1,6 +1,5 @@
 package com.example.cameron.cookieclicker;
 
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,8 +23,8 @@ public class MainActivity extends ActionBarActivity {
     private int cookie4_amount = -3000;
     private int cookie5_amount = -10000;
     private int cookie6_amount = -40000;
-    private long CPS = 0;
-
+    public double CPS = 0.0;
+    private int timertest = 0;
 
     Button mCookie0;
     Button mCookie1;
@@ -33,8 +35,8 @@ public class MainActivity extends ActionBarActivity {
     Button mCookie6;
     Button mCookie7;
 
-    TextView mBankDisplay;
-    TextView mCPS;
+    public TextView mCPS;
+    public TextView mBankDisplay;
     TextView mCookie1Price;
     TextView mCookie2Price;
     TextView mCookie3Price;
@@ -46,16 +48,29 @@ public class MainActivity extends ActionBarActivity {
 
     public Building[] mBuildings;
 
-    private Handler mHandler = new Handler();
-    private boolean wasRun = true;
+
+    public TimerTask mTimerTask = new TimerTask() {
+        @Override
+        public void run() {
+            timertest += 1;
+            mBank.mBankBalance += CPS;
+//            mCPS.setText(""+CPS);
+//            setBankDisplay();
+            Log.d(TAG, "Timer: " + timertest);
+        }
+    };
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBank = new Bank();
+        Timer mTimer = new Timer();
 
+        mTimer.scheduleAtFixedRate(mTimerTask,1000,1000);
+
+        mBank = new Bank();
 
         mCookie0 = (Button) findViewById(R.id.cookie0);
 
@@ -67,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie6 = (Button) findViewById(R.id.cookie6);
 
         mBankDisplay = (TextView) findViewById(R.id.bankdisplay);
-        mCPS = (TextView) findViewById(R.id.cps);
+        mCPS = (TextView) findViewById(R.id.cpsdisplay);
         mCookie1Price = (TextView) findViewById(R.id.cookie1_price);
         mCookie2Price = (TextView) findViewById(R.id.cookie2_price);
         mCookie3Price = (TextView) findViewById(R.id.cookie3_price);
@@ -83,21 +98,9 @@ public class MainActivity extends ActionBarActivity {
         mBuildings[4] = new Building();
         mBuildings[5] = new Building();
 
-
         mBankDisplay.setText("" + mBank.getBalance());
+        mCPS.setText(""+CPS);
 
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (wasRun) {
-                    mCPS.setText("" +CPS);
-                    //whatever you want to do if run
-                    //you can add you want to increase variable here
-                }
-                mHandler.postDelayed(this, 1000);
-            }
-        }1000); // 1 seconds
 
 
         mCookie0.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +108,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 mBank.deposit(cookie0_amount);
                 mBankDisplay.setText("" + mBank.getBalance());
-
             }
         });
 
@@ -115,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance + cookie1_amount) >= 0) {
                     mBank.deposit(cookie1_amount);
                     mBuildings[0].addC1Building(1);
-                    CPS += 1;
+                    CPS += .1;
                     Log.d(TAG, "CPS = " + CPS);
 //                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
@@ -180,7 +182,6 @@ public class MainActivity extends ActionBarActivity {
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
 
-                } else {
                 }
             }
         });
