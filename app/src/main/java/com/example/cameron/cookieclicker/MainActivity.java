@@ -20,14 +20,24 @@ public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
 
     private int cookie0_amount = 1;
-    private int cookie1_amount = -15;
-    private int cookie2_amount = -100;
-    private int cookie3_amount = -500;
-    private int cookie4_amount = -3000;
-    private int cookie5_amount = -10000;
-    private int cookie6_amount = -40000;
-    private int cookie7_amount = -10000;
-    //    public BigDecimal CPS = new BigDecimal(0.0);
+    private int cookie1_amount = 15;
+    private int cookie2_amount = 100;
+    private int cookie3_amount = 500;
+    private int cookie4_amount = 3000;
+    private int cookie5_amount = 10000;
+    private int cookie6_amount = 40000;
+    private int cookie7_amount = 10000;
+    private double mPrice;
+    int mPrices;
+
+    private int cookie1_base_amount = 15;
+    private int cookie2_base_amount = 100;
+    private int cookie3_base_amount = 500;
+    private int cookie4_base_amount = 3000;
+    private int cookie5_base_amount = 10000;
+    private int cookie6_base_amount = 40000;
+    private int cookie7_base_amount = 10000;
+
     public int CPS = 0;
     private int timertest = 0;
 
@@ -55,6 +65,7 @@ public class MainActivity extends ActionBarActivity {
     public Building[] mBuildings;
 
 
+
     public TimerTask mTimerTask = new TimerTask() {
         @Override
         public void run() {
@@ -73,6 +84,14 @@ public class MainActivity extends ActionBarActivity {
             mBankDisplay.setText("" + mBank.getBalance());
         }
     };
+
+
+    public double addBuildingPrice(int baseCost, double buildingNumber ){
+        mPrice = baseCost * (Math.pow(1.15, buildingNumber));
+        Log.d(TAG, "mPrice: " +mPrice);
+        return mPrice;
+    }
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -127,14 +146,21 @@ public class MainActivity extends ActionBarActivity {
         });
 
 
+
         mCookie1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie1_amount) >= 0) {
-                    mBank.deposit(cookie1_amount);
+                    mBank.purchase(cookie1_amount);
                     mBuildings[0].addC1Building(1);
-//                    BigDecimal result = CPS.add(new BigDecimal(.1));
-//                    System.out.println(result);
+
+                    addBuildingPrice(cookie1_base_amount, mBuildings[0].numberOfC1Buildings());
+
+                    mPrice = mPrices;
+                    cookie1_amount = mPrices;
+                    mCookie1Price.setText(mPrices);
+//                        Log.d(TAG, "buildingPrice is: ");
+
                     CPS += 1;
                     mCPS.setText("CPS: " + (CPS / 10.0));
                     Log.d(TAG, "CPS = " + CPS);
@@ -148,7 +174,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie2_amount) >= 0) {
-                    mBank.deposit(cookie2_amount);
+                    mBank.purchase(cookie2_amount);
                     mBuildings[1].addC2Building(1);
                     CPS += 5;
                     mCPS.setText("CPS: " + (CPS / 10.0));
@@ -163,7 +189,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie3_amount) >= 0) {
-                    mBank.deposit(cookie3_amount);
+                    mBank.purchase(cookie3_amount);
                     mBuildings[2].addC3Building(1);
                     CPS += 40;
                     mCPS.setText("CPS: " + (CPS / 10.0));
@@ -178,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie4_amount) >= 0) {
-                    mBank.deposit(cookie4_amount);
+                    mBank.purchase(cookie4_amount);
                     mBuildings[3].addC4Building(1);
                     CPS += 100;
                     mCPS.setText("CPS: " + (CPS / 10.0));
@@ -192,7 +218,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie5_amount) >= 0) {
-                    mBank.deposit(cookie5_amount);
+                    mBank.purchase(cookie5_amount);
                     mBuildings[4].addC5Building(1);
                     CPS += 400;
                     mCPS.setText("CPS: " + (CPS / 10.0));
@@ -206,7 +232,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie6_amount) >= 0) {
-                    mBank.deposit(cookie6_amount);
+                    mBank.purchase(cookie6_amount);
                     mBuildings[5].addC6Building(1);
                     CPS += 1000;
                     mCPS.setText("CPS: " + (CPS / 10.0));
@@ -221,7 +247,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if ((mBank.mBankBalance + cookie7_amount) >= 0) {
-                    mBank.deposit(cookie7_amount);
+                    mBank.purchase(cookie7_amount);
                     mBuildings[6].addC6Building(1);
                     CPS += 4000;
                     mCPS.setText("CPS: " + (CPS / 10.0));

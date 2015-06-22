@@ -12,6 +12,12 @@ public class Building {
     private int mC5Number;
     private int mC6Number;
 
+    int baseCost;
+    private double mPrice;
+
+
+
+
 // C1
     public int addC1Building(int mNumber) {
         mNumber += 1;
@@ -71,5 +77,8 @@ public class Building {
     public int numberOfC6Buildings() {
         return mC6Number;
     }
+
+
+
 
 }
