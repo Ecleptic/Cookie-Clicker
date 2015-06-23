@@ -21,10 +21,8 @@ public class MainActivity extends ActionBarActivity {
     private static final String TAGS = "CookiePrices";
     private static final String COUNT = "Count";
 
-
-
     private int cookie0_amount = 1;
-    private static int cookie1_amount = 15;
+    private int cookie1_amount = 15;
     private int cookie2_amount = 100;
     private int cookie3_amount = 500;
     private int cookie4_amount = 3000;
@@ -158,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie1_base_amount, mBuildings[0].numberOfC1Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie1_amount = (int) mPrice;
-                    mPrices = String.valueOf(+mPrice);
+                    mPrices = String.valueOf(+cookie1_amount);
                     mCookie1Price.setText(mPrices);
                         Log.d(TAGS, "buildingPrice is rounded: " +cookie1_amount);
 
@@ -167,7 +165,6 @@ public class MainActivity extends ActionBarActivity {
                     Log.d(TAG, "CPS = " + CPS);
 //                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
-
                 }
             }
         });
@@ -182,7 +179,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie2_base_amount, mBuildings[1].numberOfC2Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie2_amount = (int) mPrice;
-                    mPrices = String.valueOf(+mPrice);
+                    mPrices = String.valueOf(+cookie2_amount);
                     mCookie2Price.setText(mPrices);
 
                     CPS += 5;
@@ -203,7 +200,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie3_base_amount, mBuildings[2].numberOfC3Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie3_amount = (int) mPrice;
-                    mPrices = String.valueOf(mPrice);
+                    mPrices = String.valueOf(+cookie3_amount);
                     mCookie3Price.setText(mPrices);
 
                     CPS += 40;
@@ -225,7 +222,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie4_base_amount, mBuildings[3].numberOfC4Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie4_amount = (int) mPrice;
-                    mPrices = String.valueOf(mPrice);
+                    mPrices = String.valueOf(+cookie4_amount);
                     mCookie4Price.setText(mPrices);
 
                     CPS += 100;
@@ -246,7 +243,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie5_base_amount, mBuildings[4].numberOfC5Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie5_amount = (int) mPrice;
-                    mPrices = String.valueOf(mPrice);
+                    mPrices = String.valueOf(+cookie5_amount);
                     mCookie5Price.setText(mPrices);
 
                     CPS += 400;
@@ -267,7 +264,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie6_base_amount, mBuildings[5].numberOfC6Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie6_amount = (int) mPrice;
-                    mPrices = String.valueOf(mPrice);
+                    mPrices = String.valueOf(+cookie6_amount);
                     mCookie6Price.setText(mPrices);
 
                     CPS += 1000;
@@ -289,7 +286,7 @@ public class MainActivity extends ActionBarActivity {
                     addBuildingPrice(cookie7_base_amount, mBuildings[6].numberOfC7Buildings());
                     Log.d(TAGS, "buildingPrice is: " + mPrice);
                     cookie7_amount = (int) mPrice;
-                    mPrices = String.valueOf(mPrice);
+                    mPrices = String.valueOf(+cookie7_amount);
                     mCookie7Price.setText(mPrices);
 
                     CPS += 4000;
