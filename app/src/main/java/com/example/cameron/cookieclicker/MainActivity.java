@@ -150,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie1_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie1_amount) >= 0) {
                     mBank.purchase(cookie1_amount);
                     mBuildings[0].addC1Building(1);
 
@@ -158,7 +158,7 @@ public class MainActivity extends ActionBarActivity {
 
                     mPrice = mPrices;
                     cookie1_amount = mPrices;
-                    mCookie1Price.setText(mPrices);
+//                    mCookie1Price.setText(mPrices);
 //                        Log.d(TAG, "buildingPrice is: ");
 
                     CPS += 1;
@@ -173,7 +173,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie2_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie2_amount) >= 0) {
                     mBank.purchase(cookie2_amount);
                     mBuildings[1].addC2Building(1);
                     CPS += 5;
@@ -188,7 +188,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie3_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie3_amount) >= 0) {
                     mBank.purchase(cookie3_amount);
                     mBuildings[2].addC3Building(1);
                     CPS += 40;
@@ -203,7 +203,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie4_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie4_amount) >= 0) {
                     mBank.purchase(cookie4_amount);
                     mBuildings[3].addC4Building(1);
                     CPS += 100;
@@ -217,7 +217,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie5_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie5_amount) >= 0) {
                     mBank.purchase(cookie5_amount);
                     mBuildings[4].addC5Building(1);
                     CPS += 400;
@@ -231,7 +231,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie6_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie6_amount) >= 0) {
                     mBank.purchase(cookie6_amount);
                     mBuildings[5].addC6Building(1);
                     CPS += 1000;
@@ -246,7 +246,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((mBank.mBankBalance + cookie7_amount) >= 0) {
+                if ((mBank.mBankBalance - cookie7_amount) >= 0) {
                     mBank.purchase(cookie7_amount);
                     mBuildings[6].addC6Building(1);
                     CPS += 4000;

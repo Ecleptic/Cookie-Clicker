@@ -9,13 +9,10 @@ import java.util.ArrayList;
  */
 public class Bank {
     private static final String TAG = "Bank";
-    int mBankBalance = 10000000;
+    int mBankBalance = 0;
 
     public void purchase(int amount) {
         mBankBalance -= amount;
-        if (getBalance() < 0) {
-            Log.d(TAG, "Overdrafting from Cookie Bank");
-        }
     }
 
     public void deposit(int amount) {
