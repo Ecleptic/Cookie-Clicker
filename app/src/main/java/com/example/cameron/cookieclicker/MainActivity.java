@@ -10,10 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.math.BigDecimal;
+import java.math.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.lang.Number;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     private int cookie0_amount = 1;
-    private int cookie1_amount = 15;
+    private static int cookie1_amount = 15;
     private int cookie2_amount = 100;
     private int cookie3_amount = 500;
     private int cookie4_amount = 3000;
@@ -32,15 +32,15 @@ public class MainActivity extends ActionBarActivity {
     private int cookie6_amount = 40000;
     private int cookie7_amount = 10000;
     private double mPrice;
-    int mPrices;
+    private String mPrices;
 
-    private int cookie1_base_amount = 15;
-    private int cookie2_base_amount = 100;
-    private int cookie3_base_amount = 500;
-    private int cookie4_base_amount = 3000;
-    private int cookie5_base_amount = 10000;
-    private int cookie6_base_amount = 40000;
-    private int cookie7_base_amount = 10000;
+    private static int cookie1_base_amount = 15;
+    private static int cookie2_base_amount = 100;
+    private static int cookie3_base_amount = 500;
+    private static int cookie4_base_amount = 3000;
+    private static int cookie5_base_amount = 10000;
+    private static int cookie6_base_amount = 40000;
+    private static int cookie7_base_amount = 10000;
 
     public int CPS = 0;
     private int timertest = 0;
@@ -81,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
     };
 
 
+
     //    May need to do something about this Handler
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -93,8 +94,10 @@ public class MainActivity extends ActionBarActivity {
     public double addBuildingPrice(int baseCost, double buildingNumber ){
         mPrice = baseCost * (Math.pow(1.15, buildingNumber));
         Log.d(TAG, "mPrice: " +mPrice);
-        return mPrice;
+        mPrice = Math.round(mPrice);
+        return (int) mPrice;
     }
+
 
 
     @Override
@@ -105,10 +108,7 @@ public class MainActivity extends ActionBarActivity {
         Timer mTimer = new Timer();
         mTimer.scheduleAtFixedRate(mTimerTask, 1000, 1000);
 
-        mBank = new Bank();
-
         mCookie0 = (Button) findViewById(R.id.cookie0);
-
         mCookie1 = (Button) findViewById(R.id.cookie1);
         mCookie2 = (Button) findViewById(R.id.cookie2);
         mCookie3 = (Button) findViewById(R.id.cookie3);
@@ -127,6 +127,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie6Price = (TextView) findViewById(R.id.cookie6_price);
         mCookie7Price = (TextView) findViewById(R.id.cookie7_price);
 
+        mBank = new Bank();
         mBuildings = new Building[7];
         mBuildings[0] = new Building();
         mBuildings[1] = new Building();
@@ -155,11 +156,11 @@ public class MainActivity extends ActionBarActivity {
                     mBuildings[0].addC1Building(1);
 
                     addBuildingPrice(cookie1_base_amount, mBuildings[0].numberOfC1Buildings());
-                    Log.d(TAGS, "buildingPrice is: " +mPrices);
-
-                    double cookie1_amount = mPrice;
-//                    mCookie1Price.setText(mPrices);
-                        Log.d(TAGS, "buildingPrice is: " +cookie1_amount);
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie1_amount = (int) mPrice;
+                    mPrices = String.valueOf(+mPrice);
+                    mCookie1Price.setText(mPrices);
+                        Log.d(TAGS, "buildingPrice is rounded: " +cookie1_amount);
 
                     CPS += 1;
                     mCPS.setText("CPS: " + (CPS / 10.0));
@@ -177,9 +178,15 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance - cookie2_amount) >= 0) {
                     mBank.purchase(cookie2_amount);
                     mBuildings[1].addC2Building(1);
+
+                    addBuildingPrice(cookie2_base_amount, mBuildings[1].numberOfC2Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie2_amount = (int) mPrice;
+                    mPrices = String.valueOf(+mPrice);
+                    mCookie2Price.setText(mPrices);
+
                     CPS += 5;
                     mCPS.setText("CPS: " + (CPS / 10.0));
-
 //                    Log.d(TAG, "mC2Number is: " + mBuildings[1].numberOfC2Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
@@ -192,6 +199,13 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance - cookie3_amount) >= 0) {
                     mBank.purchase(cookie3_amount);
                     mBuildings[2].addC3Building(1);
+
+                    addBuildingPrice(cookie3_base_amount, mBuildings[2].numberOfC3Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie3_amount = (int) mPrice;
+                    mPrices = String.valueOf(mPrice);
+                    mCookie3Price.setText(mPrices);
+
                     CPS += 40;
                     mCPS.setText("CPS: " + (CPS / 10.0));
 
@@ -207,6 +221,13 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance - cookie4_amount) >= 0) {
                     mBank.purchase(cookie4_amount);
                     mBuildings[3].addC4Building(1);
+
+                    addBuildingPrice(cookie4_base_amount, mBuildings[3].numberOfC4Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie4_amount = (int) mPrice;
+                    mPrices = String.valueOf(mPrice);
+                    mCookie4Price.setText(mPrices);
+
                     CPS += 100;
                     mCPS.setText("CPS: " + (CPS / 10.0));
 //                    Log.d(TAG, "mC4Number is: " + mBuildings[3].numberOfC4Buildings());
@@ -221,6 +242,13 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance - cookie5_amount) >= 0) {
                     mBank.purchase(cookie5_amount);
                     mBuildings[4].addC5Building(1);
+
+                    addBuildingPrice(cookie5_base_amount, mBuildings[4].numberOfC5Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie5_amount = (int) mPrice;
+                    mPrices = String.valueOf(mPrice);
+                    mCookie5Price.setText(mPrices);
+
                     CPS += 400;
                     mCPS.setText("CPS: " + (CPS / 10.0));
 //                    Log.d(TAG, "mC5Number is: " + mBuildings[4].numberOfC5Buildings());
@@ -235,6 +263,13 @@ public class MainActivity extends ActionBarActivity {
                 if ((mBank.mBankBalance - cookie6_amount) >= 0) {
                     mBank.purchase(cookie6_amount);
                     mBuildings[5].addC6Building(1);
+
+                    addBuildingPrice(cookie6_base_amount, mBuildings[5].numberOfC6Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie6_amount = (int) mPrice;
+                    mPrices = String.valueOf(mPrice);
+                    mCookie6Price.setText(mPrices);
+
                     CPS += 1000;
                     mCPS.setText("CPS: " + (CPS / 10.0));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
@@ -249,7 +284,14 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 if ((mBank.mBankBalance - cookie7_amount) >= 0) {
                     mBank.purchase(cookie7_amount);
-                    mBuildings[6].addC6Building(1);
+                    mBuildings[6].addC7Building(1);
+
+                    addBuildingPrice(cookie7_base_amount, mBuildings[6].numberOfC7Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie7_amount = (int) mPrice;
+                    mPrices = String.valueOf(mPrice);
+                    mCookie7Price.setText(mPrices);
+
                     CPS += 4000;
                     mCPS.setText("CPS: " + (CPS / 10.0));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());

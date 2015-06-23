@@ -11,14 +11,13 @@ public class Building {
     private int mC4Number;
     private int mC5Number;
     private int mC6Number;
+    private int mC7Number;
 
     int baseCost;
     private double mPrice;
 
 
-
-
-// C1
+    // C1
     public int addC1Building(int mNumber) {
         mNumber += 1;
         mC1Number += 1;
@@ -69,6 +68,7 @@ public class Building {
     }
 
 // C6
+
     public int addC6Building(int mNumber) {
         mNumber += 1;
         mC6Number += 1;
@@ -78,6 +78,15 @@ public class Building {
         return mC6Number;
     }
 
+// C7
+    public int addC7Building(int mNumber) {
+        mNumber += 1;
+        mC7Number += 1;
+        return mNumber;
+    }
+    public int numberOfC7Buildings() {
+        return mC7Number;
+    }
 
 
 
