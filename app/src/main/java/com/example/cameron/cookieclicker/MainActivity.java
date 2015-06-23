@@ -18,6 +18,10 @@ import java.util.TimerTask;
 
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
+    private static final String TAGS = "CookiePrices";
+    private static final String COUNT = "Count";
+
+
 
     private int cookie0_amount = 1;
     private int cookie1_amount = 15;
@@ -72,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
             timertest += 1;
             mBank.mBankBalance += (CPS / 10.0);
             mHandler.obtainMessage(1).sendToTarget();
-            Log.d(TAG, "Timer: " + timertest);
+            Log.d(COUNT, "Timer: " + timertest);
         }
     };
 
@@ -99,7 +103,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         Timer mTimer = new Timer();
-
         mTimer.scheduleAtFixedRate(mTimerTask, 1000, 1000);
 
         mBank = new Bank();
@@ -136,7 +139,6 @@ public class MainActivity extends ActionBarActivity {
         mBankDisplay.setText("" + mBank.getBalance());
         mCPS.setText("CPS: " + (CPS / 10.0));
 
-
         mCookie0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,8 +146,6 @@ public class MainActivity extends ActionBarActivity {
                 mBankDisplay.setText("" + mBank.getBalance());
             }
         });
-
-
 
         mCookie1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,17 +155,18 @@ public class MainActivity extends ActionBarActivity {
                     mBuildings[0].addC1Building(1);
 
                     addBuildingPrice(cookie1_base_amount, mBuildings[0].numberOfC1Buildings());
+                    Log.d(TAGS, "buildingPrice is: " +mPrices);
 
-                    mPrice = mPrices;
-                    cookie1_amount = mPrices;
+                    double cookie1_amount = mPrice;
 //                    mCookie1Price.setText(mPrices);
-//                        Log.d(TAG, "buildingPrice is: ");
+                        Log.d(TAGS, "buildingPrice is: " +cookie1_amount);
 
                     CPS += 1;
                     mCPS.setText("CPS: " + (CPS / 10.0));
                     Log.d(TAG, "CPS = " + CPS);
 //                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
+
                 }
             }
         });
