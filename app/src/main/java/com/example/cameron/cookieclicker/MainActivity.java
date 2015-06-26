@@ -30,6 +30,11 @@ public class MainActivity extends ActionBarActivity {
     private int cookie5_amount = 10000;
     private int cookie6_amount = 40000;
     private int cookie7_amount = 10000;
+    private int cookie8_amount = 1667000;
+    private int cookie9_amount = 123456700;
+    private long cookie10_amount = 4000000000L;
+    private long cookie11_amount = 75000000000L;
+
     private double mPrice;
     private String mPrices;
     private double CPSS;
@@ -41,6 +46,11 @@ public class MainActivity extends ActionBarActivity {
     private static int cookie5_base_amount = 10000;
     private static int cookie6_base_amount = 40000;
     private static int cookie7_base_amount = 10000;
+    private static int cookie8_base_amount = 1667000;
+    private static int cookie9_base_amount = 123456700;
+    private static long cookie10_base_amount = 4000000000L;     // "L" at the end because it's a long?
+    private static long cookie11_base_amount = 75000000000L;    // "L" at the end because it's a long?
+
 
     public double CPS = 0.0;
     private int timertest = 0;
@@ -53,6 +63,10 @@ public class MainActivity extends ActionBarActivity {
     Button mCookie5;
     Button mCookie6;
     Button mCookie7;
+    Button mCookie8;
+    Button mCookie9;
+    Button mCookie10;
+    Button mCookie11;
 
     public TextView mCPS;
     public TextView mBankDisplay;
@@ -63,6 +77,10 @@ public class MainActivity extends ActionBarActivity {
     TextView mCookie5Price;
     TextView mCookie6Price;
     TextView mCookie7Price;
+    TextView mCookie8Price;
+    TextView mCookie9Price;
+    TextView mCookie10Price;
+    TextView mCookie11Price;
 
     Bank mBank;
 
@@ -72,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
     public TimerTask mTimerTask = new TimerTask() {
         @Override
         public void run() {
-            timertest += 1;
+//            timertest += 1;
             mBank.mBankBalance += (CPS);
             mHandler.obtainMessage(1).sendToTarget();
             Log.d(COUNT, "Timer: " + timertest);
@@ -88,11 +106,6 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
-    public static BigDecimal increaseBy1(BigDecimal value) {
-        int scale = value.scale();
-        return value.add(BigDecimal.ONE.scaleByPowerOfTen(-scale));
-    }
-
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -105,9 +118,16 @@ public class MainActivity extends ActionBarActivity {
 
     public double addBuildingPrice(int baseCost, double buildingNumber) {
         mPrice = baseCost * (Math.pow(1.15, buildingNumber));
-        Log.d(TAG, "mPrice: " + mPrice);
         mPrice = Math.round(mPrice);
+        Log.d(TAG, "mPrice: " + mPrice);
         return (int) mPrice;
+    }
+
+    public long addBuildingPriceLong(long baseCost, double buildingNumber) {
+        mPrice = baseCost * (Math.pow(1.15, buildingNumber));
+        mPrice = Math.round(mPrice);
+        Log.d(TAG, "mPrice: " + mPrice);
+        return (long) mPrice;
     }
 
 
@@ -127,6 +147,11 @@ public class MainActivity extends ActionBarActivity {
         mCookie5 = (Button) findViewById(R.id.cookie5);
         mCookie6 = (Button) findViewById(R.id.cookie6);
         mCookie7 = (Button) findViewById(R.id.cookie7);
+        mCookie8 = (Button) findViewById(R.id.cookie8);
+        mCookie9 = (Button) findViewById(R.id.cookie9);
+        mCookie10 = (Button) findViewById(R.id.cookie10);
+        mCookie11 = (Button) findViewById(R.id.cookie11);
+
 
         mBankDisplay = (TextView) findViewById(R.id.bankdisplay);
         mCPS = (TextView) findViewById(R.id.cpsdisplay);
@@ -137,9 +162,14 @@ public class MainActivity extends ActionBarActivity {
         mCookie5Price = (TextView) findViewById(R.id.cookie5_price);
         mCookie6Price = (TextView) findViewById(R.id.cookie6_price);
         mCookie7Price = (TextView) findViewById(R.id.cookie7_price);
+        mCookie8Price = (TextView) findViewById(R.id.cookie8_price);
+        mCookie9Price = (TextView) findViewById(R.id.cookie9_price);
+        mCookie10Price = (TextView) findViewById(R.id.cookie10_price);
+        mCookie11Price = (TextView) findViewById(R.id.cookie11_price);
+
 
         mBank = new Bank();
-        mBuildings = new Building[7];
+        mBuildings = new Building[12];
         mBuildings[0] = new Building();
         mBuildings[1] = new Building();
         mBuildings[2] = new Building();
@@ -147,6 +177,12 @@ public class MainActivity extends ActionBarActivity {
         mBuildings[4] = new Building();
         mBuildings[5] = new Building();
         mBuildings[6] = new Building();
+        mBuildings[7] = new Building();
+        mBuildings[8] = new Building();
+        mBuildings[9] = new Building();
+        mBuildings[10] = new Building();
+        mBuildings[11] = new Building();
+
 
         mBankDisplay.setText("" + mBank.getBalance());
         mCPS.setText("CPS: " + (CPS));
@@ -155,7 +191,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 mBank.deposit(cookie0_amount);
-                mBankDisplay.setText("" + mBank.getBalance());
+                String result = String.format("%.0f", mBank.mBankBalance);
+                mBankDisplay.setText("" + result);
             }
         });
 
@@ -174,14 +211,12 @@ public class MainActivity extends ActionBarActivity {
                     Log.d(TAGS, "buildingPrice is rounded: " + cookie1_amount);
                     CPS += .1;
                     CPS = round(CPS, 1);
-//                    Log.d(TAG, "CPS: " +(CPSS));
-//                    CPSS = .1;
-//                    CPSS /= 10.0;
-//                    CPS += CPSS / 10.0;
+
                     mCPS.setText("CPS: " + (CPS));
                     Log.d(TAG, "CPS = " + CPS);
 //                    Log.d(TAG, "mC1Number is: " + mBuildings[tgtgggtg0].numberOfC1Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
@@ -202,7 +237,8 @@ public class MainActivity extends ActionBarActivity {
                     CPS += .5;
                     mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC2Number is: " + mBuildings[1].numberOfC2Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
@@ -224,7 +260,8 @@ public class MainActivity extends ActionBarActivity {
                     mCPS.setText("CPS: " + (CPS));
 
 //                    Log.d(TAG, "mC3Number is: " + mBuildings[2].numberOfC3Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
@@ -245,7 +282,8 @@ public class MainActivity extends ActionBarActivity {
                     CPS += 10;
                     mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC4Number is: " + mBuildings[3].numberOfC4Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
@@ -266,7 +304,8 @@ public class MainActivity extends ActionBarActivity {
                     CPS += 40;
                     mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC5Number is: " + mBuildings[4].numberOfC5Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
@@ -287,8 +326,8 @@ public class MainActivity extends ActionBarActivity {
                     CPS += 100;
                     mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
-
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
@@ -309,11 +348,100 @@ public class MainActivity extends ActionBarActivity {
                     CPS += 400;
                     mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
-                    mBankDisplay.setText("" + mBank.getBalance());
-
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
                 }
             }
         });
+
+        mCookie8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance - cookie8_amount) >= 0) {
+                    mBank.purchase(cookie8_amount);
+                    mBuildings[7].addC8Building(1);
+
+                    addBuildingPrice(cookie8_base_amount, mBuildings[7].numberOfC8Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie8_amount = (int) mPrice;
+                    mPrices = String.valueOf(+cookie8_amount);
+                    mCookie8Price.setText(mPrices);
+
+                    CPS += 6666;
+                    mCPS.setText("CPS: " + (CPS));
+//                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
+                }
+            }
+        });
+        mCookie9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance - cookie9_amount) >= 0) {
+                    mBank.purchase(cookie9_amount);
+                    mBuildings[8].addC9Building(1);
+
+                    addBuildingPrice(cookie9_base_amount, mBuildings[8].numberOfC9Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie9_amount = (int) mPrice;
+                    mPrices = String.valueOf(+cookie9_amount);
+                    mCookie9Price.setText(mPrices);
+
+                    CPS += 98765;
+                    mCPS.setText("CPS: " + (CPS));
+//                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
+                }
+            }
+        });
+        mCookie10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance - cookie10_amount) >= 0) {
+                    mBank.purchaselong(cookie10_amount);
+                    mBuildings[9].addC10Building(1);
+
+                    addBuildingPriceLong(cookie10_base_amount, mBuildings[9].numberOfC10Buildings());
+                    Log.d(TAGS, "buildingPrice is: " + mPrice);
+                    cookie10_amount = (int) mPrice;
+                    mPrices = String.valueOf(+cookie10_amount);
+                    mCookie7Price.setText(mPrices);
+
+                    CPS += 999999;
+                    mCPS.setText("CPS: " + (CPS));
+//                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
+                }
+            }
+        });
+
+        mCookie11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((mBank.mBankBalance - cookie11_amount) >= 0) {
+//                    This purchase may not work.... if so use purchase long.
+                    mBank.purchaselong(cookie11_amount);
+                    mBuildings[10].addC11Building(1);
+//                    Also may not work...
+                    addBuildingPriceLong(cookie11_base_amount, mBuildings[10].numberOfC11Buildings());
+                    cookie11_amount = (int) mPrice;
+                    mPrices = String.valueOf(+cookie11_amount);
+                    mCookie11Price.setText(mPrices);
+
+                    CPS += 10000000;
+                    mCPS.setText("CPS: " +(CPS));
+//                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
+                    String result = String.format("%.0f", mBank.mBankBalance);
+                    mBankDisplay.setText("" + result);
+                }
+            }
+        });
+
+
+
 
     }
 
