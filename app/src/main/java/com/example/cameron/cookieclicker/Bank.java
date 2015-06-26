@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Bank {
     private static final String TAG = "Bank";
-    int mBankBalance = 10000000;
+    double mBankBalance = 1000000;
 
     public void purchase(int amount) {
         mBankBalance -= amount;
@@ -19,8 +19,8 @@ public class Bank {
         mBankBalance += amount;
     }
 
-    public int getBalance() {
-        int total = mBankBalance;
+    public double getBalance() {
+        double total = mBankBalance;
 //        return total;
         return mBankBalance;
     }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.math.*;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
     private int cookie7_amount = 10000;
     private double mPrice;
     private String mPrices;
+    private double CPSS;
 
     private static int cookie1_base_amount = 15;
     private static int cookie2_base_amount = 100;
@@ -40,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     private static int cookie6_base_amount = 40000;
     private static int cookie7_base_amount = 10000;
 
-    public int CPS = 0;
+    public double CPS = 0.0;
     private int timertest = 0;
 
     Button mCookie0;
@@ -67,35 +69,46 @@ public class MainActivity extends ActionBarActivity {
     public Building[] mBuildings;
 
 
-
     public TimerTask mTimerTask = new TimerTask() {
         @Override
         public void run() {
             timertest += 1;
-            mBank.mBankBalance += (CPS / 10.0);
+            mBank.mBankBalance += (CPS);
             mHandler.obtainMessage(1).sendToTarget();
             Log.d(COUNT, "Timer: " + timertest);
+//            Log.d(TAG, "CPS: " +CPS);
         }
     };
 
-
-
-    //    May need to do something about this Handler
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            mCPS.setText("CPS: " + (CPS / 10.0));
-            mBankDisplay.setText("" + mBank.getBalance());
+            mCPS.setText("CPS: " + (CPS));
+            String result = String.format("%.0f", mBank.mBankBalance);
+            mBankDisplay.setText("" + result);
         }
     };
 
+    public static BigDecimal increaseBy1(BigDecimal value) {
+        int scale = value.scale();
+        return value.add(BigDecimal.ONE.scaleByPowerOfTen(-scale));
+    }
 
-    public double addBuildingPrice(int baseCost, double buildingNumber ){
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
+    public double addBuildingPrice(int baseCost, double buildingNumber) {
         mPrice = baseCost * (Math.pow(1.15, buildingNumber));
-        Log.d(TAG, "mPrice: " +mPrice);
+        Log.d(TAG, "mPrice: " + mPrice);
         mPrice = Math.round(mPrice);
         return (int) mPrice;
     }
-
 
 
     @Override
@@ -136,7 +149,7 @@ public class MainActivity extends ActionBarActivity {
         mBuildings[6] = new Building();
 
         mBankDisplay.setText("" + mBank.getBalance());
-        mCPS.setText("CPS: " + (CPS / 10.0));
+        mCPS.setText("CPS: " + (CPS));
 
         mCookie0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,12 +171,16 @@ public class MainActivity extends ActionBarActivity {
                     cookie1_amount = (int) mPrice;
                     mPrices = String.valueOf(+cookie1_amount);
                     mCookie1Price.setText(mPrices);
-                        Log.d(TAGS, "buildingPrice is rounded: " +cookie1_amount);
-
-                    CPS += 1;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    Log.d(TAGS, "buildingPrice is rounded: " + cookie1_amount);
+                    CPS += .1;
+                    CPS = round(CPS, 1);
+//                    Log.d(TAG, "CPS: " +(CPSS));
+//                    CPSS = .1;
+//                    CPSS /= 10.0;
+//                    CPS += CPSS / 10.0;
+                    mCPS.setText("CPS: " + (CPS));
                     Log.d(TAG, "CPS = " + CPS);
-//                    Log.d(TAG, "mC1Number is: " + mBuildings[0].numberOfC1Buildings());
+//                    Log.d(TAG, "mC1Number is: " + mBuildings[tgtgggtg0].numberOfC1Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
             }
@@ -182,8 +199,8 @@ public class MainActivity extends ActionBarActivity {
                     mPrices = String.valueOf(+cookie2_amount);
                     mCookie2Price.setText(mPrices);
 
-                    CPS += 5;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    CPS += .5;
+                    mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC2Number is: " + mBuildings[1].numberOfC2Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
@@ -203,8 +220,8 @@ public class MainActivity extends ActionBarActivity {
                     mPrices = String.valueOf(+cookie3_amount);
                     mCookie3Price.setText(mPrices);
 
-                    CPS += 40;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    CPS += 4;
+                    mCPS.setText("CPS: " + (CPS));
 
 //                    Log.d(TAG, "mC3Number is: " + mBuildings[2].numberOfC3Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
@@ -225,8 +242,8 @@ public class MainActivity extends ActionBarActivity {
                     mPrices = String.valueOf(+cookie4_amount);
                     mCookie4Price.setText(mPrices);
 
-                    CPS += 100;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    CPS += 10;
+                    mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC4Number is: " + mBuildings[3].numberOfC4Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
@@ -246,8 +263,8 @@ public class MainActivity extends ActionBarActivity {
                     mPrices = String.valueOf(+cookie5_amount);
                     mCookie5Price.setText(mPrices);
 
-                    CPS += 400;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    CPS += 40;
+                    mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC5Number is: " + mBuildings[4].numberOfC5Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
                 }
@@ -267,8 +284,8 @@ public class MainActivity extends ActionBarActivity {
                     mPrices = String.valueOf(+cookie6_amount);
                     mCookie6Price.setText(mPrices);
 
-                    CPS += 1000;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    CPS += 100;
+                    mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
 
@@ -289,8 +306,8 @@ public class MainActivity extends ActionBarActivity {
                     mPrices = String.valueOf(+cookie7_amount);
                     mCookie7Price.setText(mPrices);
 
-                    CPS += 4000;
-                    mCPS.setText("CPS: " + (CPS / 10.0));
+                    CPS += 400;
+                    mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
                     mBankDisplay.setText("" + mBank.getBalance());
 
