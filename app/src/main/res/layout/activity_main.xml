@@ -12,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cookie0"
-        android:textSize="38sp"/>
+        android:src="@drawable/perfectcookie"
+        android:textStyle="italic"
+        />
 
     <TextView
         android:id="@+id/bankdisplay"
@@ -258,10 +260,15 @@
                 android:text="@string/cookie11_price"
                 android:textSize="25dp"/>
         </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/upgrades_button"
+                android:text="@string/upgrades"/>
+
 
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-
 
 

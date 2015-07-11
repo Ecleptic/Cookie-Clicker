@@ -1,13 +1,21 @@
 package com.example.cameron.cookieclicker;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -55,6 +63,7 @@ public class MainActivity extends ActionBarActivity {
     public double CPS = 0.0;
     private int timertest = 0;
 
+
     Button mCookie0;
     Button mCookie1;
     Button mCookie2;
@@ -67,6 +76,7 @@ public class MainActivity extends ActionBarActivity {
     Button mCookie9;
     Button mCookie10;
     Button mCookie11;
+    Button mUpgrades;
 
     public TextView mCPS;
     public TextView mBankDisplay;
@@ -83,7 +93,6 @@ public class MainActivity extends ActionBarActivity {
     TextView mCookie11Price;
 
     Bank mBank;
-
     public Building[] mBuildings;
 
 
@@ -91,9 +100,9 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void run() {
 //            timertest += 1;
-            mBank.mBankBalance += (CPS);
+            mBank.mBankBalance += (CPS / 10);
             mHandler.obtainMessage(1).sendToTarget();
-            Log.d(COUNT, "Timer: " + timertest);
+//            Log.d(COUNT, "Timer: " + timertest);
 //            Log.d(TAG, "CPS: " +CPS);
         }
     };
@@ -132,12 +141,13 @@ public class MainActivity extends ActionBarActivity {
 
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Timer mTimer = new Timer();
-        mTimer.scheduleAtFixedRate(mTimerTask, 1000, 1000);
+        mTimer.scheduleAtFixedRate(mTimerTask, 1000, 100);
 
         mCookie0 = (Button) findViewById(R.id.cookie0);
         mCookie1 = (Button) findViewById(R.id.cookie1);
@@ -151,7 +161,7 @@ public class MainActivity extends ActionBarActivity {
         mCookie9 = (Button) findViewById(R.id.cookie9);
         mCookie10 = (Button) findViewById(R.id.cookie10);
         mCookie11 = (Button) findViewById(R.id.cookie11);
-
+        mUpgrades = (Button) findViewById(R.id.upgrades_button);
 
         mBankDisplay = (TextView) findViewById(R.id.bankdisplay);
         mCPS = (TextView) findViewById(R.id.cpsdisplay);
@@ -166,7 +176,6 @@ public class MainActivity extends ActionBarActivity {
         mCookie9Price = (TextView) findViewById(R.id.cookie9_price);
         mCookie10Price = (TextView) findViewById(R.id.cookie10_price);
         mCookie11Price = (TextView) findViewById(R.id.cookie11_price);
-
 
         mBank = new Bank();
         mBuildings = new Building[12];
@@ -187,6 +196,9 @@ public class MainActivity extends ActionBarActivity {
         mBankDisplay.setText("" + mBank.getBalance());
         mCPS.setText("CPS: " + (CPS));
 
+//        Intent i = new Intent(TaskListActivity.this, TaskActivity.class);
+
+
         mCookie0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,6 +208,16 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        mUpgrades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, UpgradesActivity.class);
+                i.putExtra(String.valueOf(UpgradesActivity.EXTRA), CPS);
+                startActivity(i);
+            }
+        });
+
+//        Cookie Buttons
         mCookie1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -432,7 +454,7 @@ public class MainActivity extends ActionBarActivity {
                     mCookie11Price.setText(mPrices);
 
                     CPS += 10000000;
-                    mCPS.setText("CPS: " +(CPS));
+                    mCPS.setText("CPS: " + (CPS));
 //                    Log.d(TAG, "mC6Number is: " + mBuildings[5].numberOfC6Buildings());
                     String result = String.format("%.0f", mBank.mBankBalance);
                     mBankDisplay.setText("" + result);
@@ -440,10 +462,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-
-
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -468,6 +488,3 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
-
-

@@ -27,5 +27,20 @@
     <string name="cookie9_price">123456700</string>
     <string name="cookie10_price">4000000000</string>
     <string name="cookie11_price">75000000000</string>
+    <string name="title_activity_achievements">AchievementsActivity</string>
+    <string name="PerfectCookie.png">Cookie</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="upgrades">Upgrades</string>
+
+    <string name="title_section1">Buildings</string>
+    <string name="title_section2">Upgrades</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+
 
 </resources>
